@@ -1,4 +1,5 @@
 using AppointmentScheudling.Models;
+using AppointmentScheudling.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,11 @@ namespace AppointmentScheudling
             });
             services.AddControllersWithViews();
 
+            // register a service with short life time
+            services.AddTransient<IAppointmentService, AppointmentService>();
+
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
